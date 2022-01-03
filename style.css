@@ -1,0 +1,36 @@
+body {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.banner {
+  height: 10vh;
+  width: 100%;
+  background: rgb(134, 122, 185);
+  text-align: center;
+  line-height: 10vh;
+  color: rgb(75, 0, 250);
+  font-size: 5vh;
+  border: inset 8px rgb(148, 139, 87);
+  text-shadow: 2px 0px rgb(255, 130, 130);
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.library__container {
+  background: black;
+  padding-top: 3vh;
+}
+
+.shelf {
+  margin-bottom: 2px;
+  background: url("images/seamless-g5d570e34f_640.jpg");
+  height: 23vh;
+  border: inset 8px rgb(235, 175, 108);
+  display: flex;
+}
+
+.book {
+  height: 17vh;
+  width: 4vh;
+  border: 1px black solid;
+}
