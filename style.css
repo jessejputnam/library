@@ -266,15 +266,15 @@ body {
 }
 
 .book {
-  height: 150px;
+  height: 160px;
   background: url(images/bookspine.png) -4px -2px no-repeat;
-  width: 35px;
+  width: 40px;
   border-radius: 8px;
   margin-left: 2px;
   margin-bottom: -4px;
-  box-shadow: 0 1px 1px 1px rgb(36, 36, 36);
-  border: outset 1px black;
+  box-shadow: 1px 2px 1px 1px rgb(36, 36, 36);
   transition: transform 0.2s, filter 0.2s;
+  /* border: solid 1px black; */
 }
 
 .book:hover {
@@ -288,23 +288,25 @@ body {
 }
 
 .book__title {
-  height: 80%;
+  height: 85%;
   writing-mode: vertical-rl;
   font-size: 9px;
   font-weight: bold;
   color: white;
   text-align: center;
   text-shadow: 1px 1px black;
-  letter-spacing: 0.1px;
-  margin: 15px auto 0;
+  letter-spacing: 0.2px;
+  margin: 18px auto 0;
+  overflow: hidden;
 }
 
 /* ######### #FLOOR ########### */
 .floor {
-  background: url("images/floor.jpg");
+  background: url("images/wood-floor\ \(1\).jpg");
   height: 100px;
   width: 100vw;
   border-top: ridge 2px gray;
+  filter: blur(0.3px);
 }
 
 /* ########## #ACTION STATES ########## */
