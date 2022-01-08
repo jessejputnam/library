@@ -1,36 +1,317 @@
+/* 
+Table of Contents:
+
+#formatting
+#banner
+#add book
+#book card
+#bookcase
+#floor
+#action states
+
+*/
+
+/* ########## #FORMATTING ########## */
 body {
   margin: 0;
   box-sizing: border-box;
+  font-family: "Luxurious Roman", Georgia, "Times New Roman", Times, serif;
 }
 
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* ########## #BANNER ########## */
 .banner {
-  height: 10vh;
   width: 100%;
-  background: rgb(134, 122, 185);
-  text-align: center;
-  line-height: 10vh;
-  color: rgb(75, 0, 250);
-  font-size: 5vh;
+  background-color: #2f4353;
+  background-image: linear-gradient(315deg, #2f4353 0%, #d2ccc4 74%);
   border: inset 8px rgb(148, 139, 87);
-  text-shadow: 2px 0px rgb(255, 130, 130);
-  font-family: Georgia, "Times New Roman", Times, serif;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
 }
 
+.banner__title {
+  text-align: center;
+  margin: 10px 0;
+  color: rgb(255, 255, 255);
+  font-size: 5vh;
+  text-shadow: 2px 2px rgb(112, 112, 112);
+}
+
+.banner__add {
+  background: linear-gradient(-70deg, #31beff, #1a03e6);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+  width: 200px;
+  height: 35px;
+  margin: 0 auto 10px;
+  padding: 10px 10px;
+  font-weight: bold;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  outline: 0;
+  padding: 0 15px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.banner__add:hover {
+  cursor: pointer;
+  box-shadow: rgba(25, 0, 253, 0.5) 0 3px 8px;
+  transform: scale(1.03);
+}
+
+.banner__add:active {
+  transform: scale(0.95);
+  filter: brightness(80%);
+}
+
+/* ########## #ADD BOOK ########## */
+.modal__add-book {
+  background: rgba(141, 131, 123, 0.959);
+  box-shadow: 0 0 5px 1px rgb(77, 77, 77);
+  color: white;
+  text-shadow: 1px 1px rgb(2, 0, 136);
+  border: double 6px black;
+  border-radius: 10px;
+  padding: 10px 10px 10px 20px;
+  width: 275px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -125px;
+  margin-left: -150px;
+  z-index: 1;
+}
+
+.modal__close {
+  position: relative;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0);
+  left: 91%;
+  top: -5px;
+  border: none;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.modal__close:hover {
+  transform: scale(1.1);
+  color: rgb(139, 0, 0);
+}
+
+.modal__close:active {
+  transform: scale(0.9);
+  filter: brightness(80%);
+}
+
+.input--box {
+  margin-bottom: 3px;
+  border-radius: 5px;
+  width: 200px;
+  padding: 3px 5px;
+}
+
+#bread {
+  height: 17px;
+  width: 17px;
+  cursor: pointer;
+}
+
+.modal__add--btn {
+  margin-top: 3px;
+  margin-left: 65px;
+  padding: 5px 10px;
+  border-radius: 7px;
+  background: rgba(133, 16, 16, 0.589);
+  color: white;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.modal__add--btn:hover {
+  cursor: pointer;
+  box-shadow: rgba(163, 0, 0, 0.5) 0 3px 8px;
+  transform: scale(1.03);
+}
+
+.modal__add--btn:active {
+  transform: scale(0.95);
+  filter: brightness(80%);
+}
+
+/* ########## #BOOK CARD ########## */
+.book__card {
+  width: 280px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -125px;
+  margin-left: -165px;
+  padding-left: 50px;
+  padding-bottom: 20px;
+  z-index: 2;
+  border-radius: 15px;
+  background: url("images/paper.jpg");
+  box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.527);
+  font-size: 25px;
+}
+
+.card__close {
+  position: relative;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0);
+  left: 86%;
+  top: 10px;
+  border: none;
+  transition: color 0.2s, transform 0.2s;
+  margin-bottom: 10px;
+}
+
+.card__close:hover {
+  color: red;
+  transform: scale(1.1);
+}
+
+.card__close:active {
+  transform: scale(0.9);
+  filter: brightness(80%);
+}
+
+.card__title {
+  font-family: "Mea Culpa", cursive;
+  font-size: 30px;
+  margin: 10px 0;
+}
+
+.card__author {
+  font-size: 15px;
+}
+
+.card__pages {
+  font-size: 15px;
+}
+
+.card__slide__container {
+  margin-top: -15px;
+  display: flex;
+  font-size: 15px;
+}
+
+.card__slide {
+  width: 30px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.card__remove {
+  margin-left: 75px;
+  background: linear-gradient(-180deg, #ff7e31, #e62c03);
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+  color: #ffffff;
+  height: 30px;
+  line-height: 30px;
+  outline: 0;
+  padding: 0 15px;
+  border: 0;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.card__remove:hover {
+  cursor: pointer;
+  box-shadow: rgba(253, 76, 0, 0.5) 0 3px 8px;
+  transform: scale(1.03);
+}
+.card__remove:active {
+  transform: scale(0.95);
+  filter: brightness(80%);
+}
+
+/* ########## #BOOKCASE ########## */
 .library__container {
-  background: black;
-  padding-top: 3vh;
+  background: url("images/wall.jpg");
+}
+
+.bookcase {
+  background: url("images/seamless-g5d570e34f_640.jpg");
+  width: 96vw;
+  max-width: 700px;
+  margin: 0 auto;
+  border-radius: 2px;
+  padding: 8px 0;
+  position: relative;
+  top: 20px;
+  box-shadow: 10px -2px 4px 1px rgba(66, 66, 66, 0.76);
 }
 
 .shelf {
-  margin-bottom: 2px;
+  width: 94%;
+  margin: 0 auto 10px;
   background: url("images/seamless-g5d570e34f_640.jpg");
-  height: 23vh;
+  height: 170px;
   border: inset 8px rgb(235, 175, 108);
+  border-top: none;
   display: flex;
+  align-items: flex-end;
+  border-radius: 3px;
 }
 
 .book {
-  height: 17vh;
+  height: 150px;
+  background: url(images/bookspine.png) -4px -2px no-repeat;
   width: 4vh;
-  border: 1px black solid;
+  border-radius: 8px;
+  margin-left: 2px;
+  margin-bottom: -4px;
+  box-shadow: 0 1px 1px 1px rgb(36, 36, 36);
+  border: outset 1px black;
+  transition: transform 0.2s, filter 0.2s;
+}
+
+.book:hover {
+  cursor: pointer;
+  transform: scale(1.03);
+}
+
+.book:active {
+  transform: scale(0.95);
+  filter: brightness(80%);
+}
+
+.book__title {
+  height: 100%;
+  writing-mode: vertical-rl;
+  font-size: 9px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  text-shadow: 1px 1px black;
+  letter-spacing: 0.1px;
+  margin: 5px auto 0;
+}
+
+/* ######### #FLOOR ########### */
+.floor {
+  background: url("images/floor.jpg");
+  height: 100px;
+  width: 100vw;
+  border-top: ridge 2px gray;
+}
+
+/* ########## #ACTION STATES ########## */
+.hidden {
+  display: none;
+}
+
+.background__blur {
+  filter: blur(2px) grayscale(30%);
 }

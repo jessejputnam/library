@@ -32,5 +32,3 @@ addBooktoLibrary(darknessAtNoon);
 addBooktoLibrary(fledgling);
 
 let sortedLibrary = myLibrary.sort((a, b) => (a.author > b.author ? 1 : -1));
-
-console.table(sortedLibrary);

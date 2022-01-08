@@ -6,18 +6,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&family=Mea+Culpa&display=swap"
+      rel="stylesheet"
+    />
+
     <link href="style.css" rel="stylesheet" />
     <script src="script.js" defer></script>
   </head>
+
   <body>
-    <header class="banner">My Library</header>
-    <div class="library__container">
-      <div class="shelf"></div>
-      <div class="shelf">
-        <div class="book"></div>
+    <main class="main__container">
+      <header class="banner">
+        <p class="banner__title">My Library</p>
+        <button class="banner__add">Add Book</button>
+      </header>
+      <!-- end banner -->
+
+      <div class="library__container">
+        <div class="bookcase">
+          <div class="shelf"></div>
+          <div class="shelf">
+            <div class="book">
+              <p class="book__title">The Lord of the Rings</p>
+            </div>
+
+            <div class="book">
+              <p class="book__title">
+                The Lord of the Rings: The Fellowship of the ring
+              </p>
+            </div>
+          </div>
+          <div class="shelf"></div>
+        </div>
       </div>
-      <div class="shelf"></div>
+      <!-- end library__container -->
+
+      <div class="floor"></div>
+    </main>
+    <!-- end main__container -->
+
+    <div class="modal__add-book hidden">
+      <button type="button" class="modal__close">X</button>
+      <form>
+        <label for="btitle">Title:</label><br />
+        <input
+          type="text"
+          id="btitle"
+          name="btitle"
+          placeholder="The Hobbit"
+          class="input--box"
+        /><br />
+        <label for="bauthor">Author:</label><br />
+        <input
+          type="text"
+          id="bauthor"
+          name="bauthor"
+          placeholder="J.R.R. Tolkien"
+          class="input--box"
+        /><br />
+        <label for="bpages">Pages:</label><br />
+        <input
+          type="number"
+          min="1"
+          id="bpages"
+          name="bpages"
+          placeholder="350"
+          class="input--box"
+        /><br />
+        <label for="bread">Read:</label>
+        <input type="checkbox" id="bread" name="bread" /><br />
+        <button type="button" class="modal__add--btn">
+          Add Book to Library
+        </button>
+      </form>
     </div>
-    <!-- end library__container -->
+    <!-- end modal__add-book -->
+
+    <div class="book__card hidden">
+      <button type="button" class="card__close">X</button>
+      <p class="card__title">The Hobbit</p>
+      <p class="card__author">J.R.R. Tolkien</p>
+      <p class="card__pages">296 pages</p>
+      <div class="card__slide__container">
+        <p class="card__read">Read</p>
+        <input class="card__slide" type="range" min="0" max="1" value="0" />
+      </div>
+      <button type="button" class="card__remove">Remove</button>
+    </div>
+    <!-- end book__card -->
   </body>
 </html>
+
+<!-- 
+  SAMPLE BOOK
+
+  <div class="book">
+            <p class="book__title">
+              The Lord of the Rings: The Fellowship of the ring
+            </p>
+          </div>
+ -->
