@@ -267,7 +267,7 @@ body {
 
 .book {
   height: 160px;
-  background: url(images/bookspine.png) -4px -2px no-repeat;
+  background: url(images/bookspine.png) -4px -3px no-repeat;
   width: 40px;
   border-radius: 8px;
   margin-left: 2px;
