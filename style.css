@@ -98,16 +98,15 @@ body {
   left: 91%;
   top: -5px;
   border: none;
-  transition: color 0.2s, transform 0.2s;
+  transition: color 0.2s, transform 0.1s;
 }
 
 .modal__close:hover {
-  transform: scale(1.1);
   color: rgb(139, 0, 0);
 }
 
 .modal__close:active {
-  transform: scale(0.9);
+  transform: scale(0.8);
   filter: brightness(80%);
 }
 
@@ -126,7 +125,7 @@ body {
 
 .modal__add--btn {
   margin-top: 3px;
-  margin-left: 65px;
+  margin-left: 55px;
   padding: 5px 10px;
   border-radius: 7px;
   background: rgba(133, 16, 16, 0.589);
