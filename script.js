@@ -1,112 +1,159 @@
 "use strict";
+
 /*
- 
-Table of Contents:
+Table of Contents
 
 #DOM Variables
-#Add Book Modal
-#Book Card
-#Add Book to Library
-#Original Book Code
+#Stored Variables
+#Stored functions
+#Filter Bar Visual
+#Filter Bar Clear Btn
+#Filter Bar Functionality
+#Filter Job Cards Functionality
 
 */
 
-////////////////////////////////////////////////
+/* #################### #DOM Variables ####################### */
+const filter = document.querySelector(".filter");
+const filterItemContainer = document.querySelector(".filter__item__container");
+let filterRemove = document.querySelectorAll(".filter__item__remove");
+const filterClear = document.querySelector(".filter__clear");
+const jobCards = document.querySelectorAll(".item__container");
+const itemFilter = document.querySelectorAll(".item__filter");
 
-/* ########## #DOM Variables ############ */
-// Banner
-const btnAddBook = document.querySelector(".banner__add");
-// Book Shelf
-const shelf = document.querySelectorAll(".shelf");
-const shelfActive = document.querySelector(".shelf__used");
-// Add Book Modal
-const modalAddBook = document.querySelector(".modal__add-book");
-const modalClose = document.querySelector(".modal__close");
-const btnAddToLibrary = document.querySelector(".modal__add--btn");
-// Book Card
-const bookCard = document.querySelector(".book__card");
-const bookCardClose = document.querySelector(".card__close");
+// Dynamic DOM Variables
+let newFilterName, newFilterItem, newFilterRemove;
 
-/* ########## #Add Book Modal ############ */
-//Open Modal
-const openAddBookModal = function () {
-  modalAddBook.classList.remove("hidden");
+/* ##################### #Stored Variables ###################### */
+let newFilterItems = [];
+
+/* ###################### #Stored Functions ##################### */
+const createFilterItemsDOM = function () {
+  newFilterItem = document.createElement("button");
+  newFilterName = document.createElement("div");
+  newFilterRemove = document.createElement("img");
 };
-btnAddBook.addEventListener("click", openAddBookModal);
 
-//Close Modal
-modalClose.addEventListener("click", () => {
-  modalAddBook.classList.add("hidden");
+const addClassesToFilterItemsDOM = function () {
+  newFilterItem.classList.add("filter__item");
+  newFilterName.classList.add("filter__item__name");
+  newFilterRemove.classList.add("filter__item__remove");
+  newFilterRemove.src = "images/icon-remove.svg";
+};
+
+const appendItemsToDOM = function () {
+  filterItemContainer.appendChild(newFilterItem);
+  newFilterItem.appendChild(newFilterName);
+  newFilterItem.appendChild(newFilterRemove);
+};
+
+const removeFilterFromBar = function () {
+  filterRemove.forEach((item) => {
+    item.addEventListener("mousedown", (e) => {
+      // remove filter item from array
+      newFilterItems = newFilterItems.filter(
+        (filterItem) => filterItem !== item.parentNode.textContent.toLowerCase()
+      );
+      // remove filter item from DOM
+      item.parentNode.remove();
+    });
+  });
+};
+
+const updateFilterRemove = () =>
+  (filterRemove = document.querySelectorAll(".filter__item__remove"));
+
+const storeFilterToArray = () =>
+  newFilterItems.push(newFilterItem.id.toLowerCase());
+
+/* ################### #Filter Bar Visual ##################### */
+
+// Hide filter if empty
+document.addEventListener("mouseup", () => {
+  if (!filterItemContainer.hasChildNodes()) filter.classList.add("hidden");
+  else filter.classList.remove("hidden");
 });
 
-/* ########## #Book Card ############ */
-//Open Card
-// const openBookCard = function () {
-//   bookCard.classList.remove("hidden");
-// };
+/* ################### #Filter Bar Clear Btn ##################### */
 
-// bookSelect.forEach((book) => {
-//   book.addEventListener("click", openBookCard);
-// });
-
-//Close Card
-bookCardClose.addEventListener("click", () => {
-  bookCard.classList.add("hidden");
+filterClear.addEventListener("mousedown", () => {
+  // Remove all children of filter item container
+  while (filterItemContainer.firstChild) {
+    filterItemContainer.removeChild(filterItemContainer.firstChild);
+  }
+  // unhide hidden item cards
+  jobCards.forEach((job) => job.classList.remove("hidden"));
+  // empty filter array
+  newFilterItems = [];
 });
 
-/* ########## #Add Book to Library ############ */
-btnAddToLibrary.addEventListener("click", () => {
-  //create library book visual
-  const spine = document.createElement("div");
-  const spineTitle = document.createElement("p");
-  spineTitle.textContent = document.getElementById("btitle").value;
-  spine.classList.add("book");
-  spineTitle.classList.add("book__title");
-  spine.appendChild(spineTitle);
-  shelfActive.appendChild(spine);
+/* ################## #Filter Bar Functionality ################### */
 
-  //close window
-  modalAddBook.classList.add("hidden");
+// Create filter item when item filter clicked
+itemFilter.forEach((filterChoice) => {
+  filterChoice.addEventListener("mousedown", () => {
+    // Add check of filter for if choice already selected
+    if (newFilterItems.includes(filterChoice.textContent.toLowerCase())) return;
 
-  //open book card on created book
-  const openBookCard = function () {
-    bookCard.classList.remove("hidden");
-  };
+    // Create new filter items in DOM
+    createFilterItemsDOM();
 
-  document.querySelectorAll(".book").forEach((book) => {
-    book.addEventListener("click", openBookCard);
+    // Add relevant classes and IDs to new filter items
+    newFilterName.textContent = filterChoice.textContent;
+    newFilterItem.setAttribute("id", filterChoice.textContent);
+    addClassesToFilterItemsDOM();
+
+    appendItemsToDOM();
+
+    updateFilterRemove();
+
+    storeFilterToArray();
+
+    // Filter for individual selection
+    jobCards.forEach((job) => {
+      if (!job.classList.contains(filterChoice.textContent.toLowerCase()))
+        job.classList.add("hidden");
+    });
+
+    // Remove filter item when clicked
+    removeFilterFromBar();
   });
 });
 
-/* ########## #Original Book Code ############ */
-let myLibrary = [];
+/* ############### #Filter Job Cards Functionality ############### */
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.info = function () {
-    return `${this.title} by ${this.author}, ${this.pages} pages, ${
-      read === true ? "finished reading" : "not read yet"
-    }`;
-  };
-}
+document.addEventListener("mouseup", () => {
+  jobCards.forEach((card) => {
+    let filterTrueCheck = 0;
+    if (newFilterItems.length === 0) {
+      card.classList.remove("hidden");
+      card.classList.add("item__container--desktop");
+      return;
+    }
+    newFilterItems.forEach((item) => {
+      if ([...card.classList].includes(item)) filterTrueCheck++;
+    });
+    if (filterTrueCheck !== newFilterItems.length) {
+      card.classList.add("hidden");
+      card.classList.remove("item__container--desktop");
+    }
+    if (filterTrueCheck === newFilterItems.length) {
+      card.classList.remove("hidden");
+      card.classList.add("item__container--desktop");
+    }
+  });
+});
 
-function addBooktoLibrary(book) {
-  return myLibrary.push(book);
-}
+// document.addEventListener("mouseup", () => {
+//   jobCards.forEach((card) => {
+//     let filterTrueCheck = 0;
+//     if (newFilterItems.length === 0) return card.classList.remove("hidden");
+//     newFilterItems.forEach((item) => {
+//       if ([...card.classList].includes(item)) filterTrueCheck++;
+//     });
 
-const theHobbit = new Book("The Hobbit", "Tolkien", 295, true);
-const paleFire = new Book("Pale Fire", "Nabokov", 300, true);
-const darknessAtNoon = new Book("Darkness at Noon", "Koestler", 170, false);
-const fledgling = new Book("Fledgling", "Butler", 230, true);
-
-console.log(theHobbit.info());
-
-addBooktoLibrary(theHobbit);
-addBooktoLibrary(paleFire);
-addBooktoLibrary(darknessAtNoon);
-addBooktoLibrary(fledgling);
-
-let sortedLibrary = myLibrary.sort((a, b) => (a.author > b.author ? 1 : -1));
+//     if (filterTrueCheck !== newFilterItems.length) card.classList.add("hidden");
+//     if (filterTrueCheck === newFilterItems.length)
+//       card.classList.remove("hidden");
+//   });
+// });
