@@ -9,7 +9,6 @@ Table of Contents:
 #Add Book Modal
 #Book Card
 #Add Book to Library
-#Original Book Code
 
 */
 
