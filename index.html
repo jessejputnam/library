@@ -1,418 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta name="author" content="Jesse Putnam" />
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- displays site properly based on user's device -->
-
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="./images/favicon-32x32.png"
-    />
+    <title>Library</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Spartan:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&family=Mea+Culpa&display=swap"
       rel="stylesheet"
     />
 
-    <title>Job Listings</title>
-
     <link href="normalize.css" rel="stylesheet" />
     <link href="style.css" rel="stylesheet" />
-
     <script src="script.js" defer></script>
   </head>
 
   <body>
-    <header class="hero"></header>
-
-    <div class="filter hidden">
-      <div class="filter__item__container"></div>
-      <!-- end filter__item__container -->
-
-      <button type="button" class="filter__clear">Clear</button>
-    </div>
-    <!-- end filter -->
-
     <main class="main__container">
-      <div
-        data-role="frontend"
-        data-level="senior"
-        data-langauges="html css javascript"
-        data-tools=""
-        class="item__container item__container--desktop frontend senior html css javascript"
-      >
-        <div class="item__logo__container">
-          <img
-            src="images/photosnap.svg"
-            alt="Photosnap Logo"
-            class="item__logo"
-          />
-        </div>
-        <!-- end item__logo__container -->
-        <div class="item item__featured__border">
-          <div class="item__desktop--left">
-            <p class="item__name text--green">
-              Photosnap
-              <span class="item__name__flag item__name__new text--white"
-                >NEW!</span
-              >
-              <span class="item__name__flag item__name__featured text--white"
-                >FEATURED</span
-              >
-            </p>
-            <h4 class="item__title">Senior Frontend Developer</h4>
-            <p class="item__descrip">
-              1d ago &middot; Full Time &middot; USA only
-            </p>
-            <hr class="item__divider" />
-          </div>
-          <!-- end item__desktop--left -->
-          <div class="item__filters__container">
-            <button class="item__filter">Frontend</button>
-            <button class="item__filter">Senior</button>
-            <button class="item__filter">HTML</button>
-            <button class="item__filter">CSS</button>
-            <button class="item__filter">JavaScript</button>
-          </div>
-          <!-- end item__filters__container -->
-        </div>
-        <!-- end item -->
-      </div>
-      <!-- end item__container -->
+      <header class="banner">
+        <p class="banner__title">My Library</p>
+        <button class="banner__add">Add Book</button>
+      </header>
+      <!-- end banner -->
 
-      <div
-        data-role="fullstack"
-        data-level="midweight"
-        data-langauges="python"
-        data-tools="react"
-        data-featured="true"
-        class="item__container item__container--desktop fullstack midweight python react"
-      >
-        <div class="item__logo__container">
-          <img src="images/manage.svg" alt="Manage Logo" class="item__logo" />
+      <div class="library__container">
+        <div class="bookcase">
+          <div class="shelf"></div>
+          <div class="shelf shelf__used"></div>
+          <div class="shelf"></div>
         </div>
-        <!-- end item__logo__container -->
-        <div class="item item__featured__border">
-          <div class="item__desktop--left">
-            <p class="item__name text--green">
-              Manage
-              <span class="item__name__flag item__name__new text--white"
-                >NEW!</span
-              >
-              <span class="item__name__flag item__name__featured text--white"
-                >FEATURED</span
-              >
-            </p>
-            <h4 class="item__title">Fullstack Developer</h4>
-            <p class="item__descrip">
-              1d ago &middot; Part Time &middot; Remote
-            </p>
-            <hr class="item__divider" />
-          </div>
-          <!-- end item__desktop--left -->
-          <div class="item__filters__container">
-            <button class="item__filter">Fullstack</button>
-            <button class="item__filter">Midweight</button>
-            <button class="item__filter">Python</button>
-            <button class="item__filter">React</button>
-          </div>
-          <!-- end item__filters__container -->
-        </div>
-        <!-- end item -->
       </div>
-      <!-- end item__container -->
+      <!-- end library__container -->
 
-      <div
-        data-role="frontend"
-        data-level="junior"
-        data-langauges="javascript"
-        data-tools="sass react"
-        class="item__container item__container--desktop frontend junior javascript sass react"
-      >
-        <div class="item__logo__container">
-          <img src="images/account.svg" alt="Account Logo" class="item__logo" />
-        </div>
-        <!-- end item__logo__container -->
-        <div class="item">
-          <div class="item__desktop--left">
-            <p class="item__name text--green">
-              Account
-              <span class="item__name__flag item__name__new text--white"
-                >NEW!</span
-              >
-            </p>
-            <h4 class="item__title">Junior Developer</h4>
-            <p class="item__descrip">
-              2d ago &middot; Part Time &middot; USA only
-            </p>
-            <hr class="item__divider" />
-          </div>
-          <!-- end item__desktop--left -->
-          <div class="item__filters__container">
-            <button class="item__filter">Frontend</button>
-            <button class="item__filter">Junior</button>
-            <button class="item__filter">React</button>
-            <button class="item__filter">Sass</button>
-            <button class="item__filter">JavaScript</button>
-          </div>
-          <!-- end item__filters__container -->
-        </div>
-        <!-- end item -->
-      </div>
-      <!-- end item__container -->
-
-      <div
-        data-role="frontend"
-        data-level="junior"
-        data-langauges="css javascript"
-        data-tools=""
-        class="item__container item__container--desktop frontend junior css javascript"
-      >
-        <div class="item__logo__container">
-          <img src="images/myhome.svg" alt="MyHome Logo" class="item__logo" />
-        </div>
-        <!-- end item__logo__container -->
-        <div class="item">
-          <div class="item__desktop--left">
-            <p class="item__name text--green">MyHome</p>
-            <h4 class="item__title">Junior Frontend Developer</h4>
-            <p class="item__descrip">
-              5d ago &middot; Contract &middot; USA only
-            </p>
-            <hr class="item__divider" />
-          </div>
-          <!-- end item__desktop--left -->
-          <div class="item__filters__container">
-            <button class="item__filter">Frontend</button>
-            <button class="item__filter">Junior</button>
-            <button class="item__filter">CSS</button>
-            <button class="item__filter">JavaScript</button>
-          </div>
-          <!-- end item__filters__container -->
-        </div>
-        <!-- end item -->
-      </div>
-      <!-- end item__container -->
-
-      <div
-        data-role="fullstack"
-        data-level="midweight"
-        data-langauges="ruby"
-        data-tools="sass"
-        class="item__container item__container--desktop fullstack midweight ruby sass"
-      >
-        <div class="item__logo__container">
-          <img
-            src="images/loop-studios.svg"
-            alt="Loop Studios Logo"
-            class="item__logo"
-          />
-        </div>
-        <!-- end item__logo__container -->
-        <div class="item">
-          <div class="item__desktop--left">
-            <p class="item__name text--green">Loop Studios</p>
-            <h4 class="item__title">Software Engineer</h4>
-            <p class="item__descrip">
-              1w ago &middot; Full Time &middot; Worldwide
-            </p>
-            <hr class="item__divider" />
-          </div>
-          <!-- end item__desktop--left -->
-          <div class="item__filters__container">
-            <button class="item__filter">Fullstack</button>
-            <button class="item__filter">Midweight</button>
-            <button class="item__filter">Sass</button>
-            <button class="item__filter">Ruby</button>
-          </div>
-          <!-- end item__filters__container -->
-        </div>
-        <!-- end item -->
-      </div>
-      <!-- end item__container -->
-
-      <div
-        data-role="backend"
-        data-level="junior"
-        data-langauges="ruby"
-        data-tools="ror"
-        class="item__container item__container--desktop backend junior ruby ror"
-      >
-        <div class="item__logo__container">
-          <img src="images/faceit.svg" alt="FaceIt Logo" class="item__logo" />
-        </div>
-        <!-- end item__logo__container -->
-        <div class="item">
-          <div class="item__desktop--left">
-            <p class="item__name text--green">FaceIt</p>
-            <h4 class="item__title">Junior Backend Developer</h4>
-            <p class="item__descrip">
-              2w ago &middot; Full Time &middot; UK only
-            </p>
-            <hr class="item__divider" />
-          </div>
-          <!-- end item__desktop--left -->
-          <div class="item__filters__container">
-            <button class="item__filter">Backend</button>
-            <button class="item__filter">Junior</button>
-            <button class="item__filter">Ruby</button>
-            <button class="item__filter">RoR</button>
-          </div>
-          <!-- end item__filters__container -->
-        </div>
-        <!-- end item -->
-      </div>
-      <!-- end item__container -->
-
-      <div
-        data-role="frontend"
-        data-level="junior"
-        data-langauges="html javascript"
-        data-tools="sass"
-        class="item__container item__container--desktop frontend junior html javascript sass"
-      >
-        <div class="item__logo__container">
-          <img src="images/shortly.svg" alt="Shortly Logo" class="item__logo" />
-        </div>
-        <!-- end item__logo__container -->
-        <div class="item">
-          <div class="item__desktop--left">
-            <p class="item__name text--green">Shortly</p>
-            <h4 class="item__title">Junior Developer</h4>
-            <p class="item__descrip">
-              2w ago &middot; Full Time &middot; Worldwide
-            </p>
-            <hr class="item__divider" />
-          </div>
-          <!-- end item__desktop--left -->
-          <div class="item__filters__container">
-            <button class="item__filter">Frontend</button>
-            <button class="item__filter">Junior</button>
-            <button class="item__filter">HTML</button>
-            <button class="item__filter">Sass</button>
-            <button class="item__filter">JavaScript</button>
-          </div>
-          <!-- end item__filters__container -->
-        </div>
-        <!-- end item -->
-      </div>
-      <!-- end item__container -->
-
-      <div
-        data-role="frontend"
-        data-level="junior"
-        data-langauges="javascript"
-        data-tools="vue sass"
-        class="item__container item__container--desktop frontend junior javascript vue sass"
-      >
-        <div class="item__logo__container">
-          <img src="images/insure.svg" alt="Insure Logo" class="item__logo" />
-        </div>
-        <!-- end item__logo__container -->
-        <div class="item">
-          <div class="item__desktop--left">
-            <p class="item__name text--green">Insure</p>
-            <h4 class="item__title">Junior Frontend Developer</h4>
-            <p class="item__descrip">
-              2w ago &middot; Full Time &middot; USA only
-            </p>
-            <hr class="item__divider" />
-          </div>
-          <!-- end item__desktop--left -->
-          <div class="item__filters__container">
-            <button class="item__filter">Frontend</button>
-            <button class="item__filter">Junior</button>
-            <button class="item__filter">Vue</button>
-            <button class="item__filter">JavaScript</button>
-            <button class="item__filter">Sass</button>
-          </div>
-          <!-- end item__filters__container -->
-        </div>
-        <!-- end item -->
-      </div>
-      <!-- end item__container -->
-
-      <div
-        data-role="fullstack"
-        data-level="midweight"
-        data-langauges="javascript python"
-        data-tools="django"
-        class="item__container item__container--desktop fullstack midweight javascript python django"
-      >
-        <div class="item__logo__container">
-          <img
-            src="images/eyecam-co.svg"
-            alt="Eyecam Co Logo"
-            class="item__logo"
-          />
-        </div>
-        <!-- end item__logo__container -->
-        <div class="item">
-          <div class="item__desktop--left">
-            <p class="item__name text--green">Eyecam Co.</p>
-            <h4 class="item__title">Full Stack Engineer</h4>
-            <p class="item__descrip">
-              3w ago &middot; FUll Time &middot; Worldwide
-            </p>
-            <hr class="item__divider" />
-          </div>
-          <!-- end item__desktop--left -->
-          <div class="item__filters__container">
-            <button class="item__filter">Fullstack</button>
-            <button class="item__filter">Midweight</button>
-            <button class="item__filter">JavaScript</button>
-            <button class="item__filter">Django</button>
-            <button class="item__filter">Python</button>
-          </div>
-          <!-- end item__filters__container -->
-        </div>
-        <!-- end item -->
-      </div>
-      <!-- end item__container -->
-
-      <div
-        data-role="frontend"
-        data-level="junior"
-        data-langauges="javascript"
-        data-tools="react sass"
-        class="item__container item__container--desktop frontend junior javascript react sass"
-      >
-        <div class="item__logo__container">
-          <img
-            src="images/the-air-filter-company.svg"
-            alt="The Air Filter Compay Logo"
-            class="item__logo"
-          />
-        </div>
-        <!-- end item__logo__container -->
-        <div class="item">
-          <div class="item__desktop--left">
-            <p class="item__name text--green">The Air Filter Company</p>
-            <h4 class="item__title">Front-end Dev</h4>
-            <p class="item__descrip">
-              1mo ago &middot; Part Time &middot; Worldwide
-            </p>
-            <hr class="item__divider" />
-          </div>
-          <!-- end item__desktop--left -->
-          <div class="item__filters__container">
-            <button class="item__filter">Frontend</button>
-            <button class="item__filter">Junior</button>
-            <button class="item__filter">React</button>
-            <button class="item__filter">Sass</button>
-            <button class="item__filter">JavaScript</button>
-          </div>
-          <!-- end item__filters__container -->
-        </div>
-        <!-- end item -->
-      </div>
-      <!-- end item__container -->
+      <div class="floor"></div>
     </main>
+    <!-- end main__container -->
+
+    <div class="modal__add-book hidden">
+      <button type="button" class="modal__close">X</button>
+      <form>
+        <label for="btitle">Title:</label><br />
+        <input
+          type="text"
+          id="btitle"
+          name="btitle"
+          placeholder="The Hobbit"
+          class="input--box"
+        /><br />
+        <label for="bauthor">Author:</label><br />
+        <input
+          type="text"
+          id="bauthor"
+          name="bauthor"
+          placeholder="J.R.R. Tolkien"
+          class="input--box"
+        /><br />
+        <label for="bpages">Pages:</label><br />
+        <input
+          type="number"
+          min="1"
+          id="bpages"
+          name="bpages"
+          placeholder="350"
+          class="input--box"
+        /><br />
+        <div class="slide-container">
+          <p class="slide-container__txt">
+            Read: <span class="read-no">no</span
+            ><span class="read-yes">yes</span>
+          </p>
+          <input
+            type="range"
+            min="0"
+            max="1"
+            value="0"
+            class="slider"
+            id="bread"
+          />
+        </div>
+        <!-- end slide-container -->
+        <button type="button" class="modal__add--btn">
+          Add Book to Library
+        </button>
+      </form>
+    </div>
+    <!-- end modal__add-book -->
+
+    <div class="book__card hidden">
+      <button type="button" class="card__close">X</button>
+      <p class="hidden__id hidden"></p>
+      <p class="card__title">The Hobbit</p>
+      <p class="card__author">J.R.R. Tolkien</p>
+      <p class="card__pages">296 pages</p>
+      <div class="card__slide__container">
+        <p class="slide-container__txt">
+          Read: <span class="read-no">no</span><span class="read-yes">yes</span>
+        </p>
+        <input class="card__slider" type="range" min="0" max="1" value="0" />
+      </div>
+      <button type="button" class="card__remove">Remove</button>
+    </div>
+    <!-- end book__card -->
   </body>
 </html>
+
+<!-- 
+  SAMPLE BOOK
+
+  <div class="book">
+            <p class="book__title">
+              The Lord of the Rings: The Fellowship of the ring
+            </p>
+          </div>
+ -->

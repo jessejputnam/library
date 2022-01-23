@@ -1,159 +1,200 @@
 "use strict";
-
 /*
-Table of Contents
+ 
+Table of Contents:
 
 #DOM Variables
 #Stored Variables
-#Stored functions
-#Filter Bar Visual
-#Filter Bar Clear Btn
-#Filter Bar Functionality
-#Filter Job Cards Functionality
+#Stored Functions
+#Add Book Modal
+#Book Card
+#Add Book to Library
+#Original Book Code
 
 */
 
-/* #################### #DOM Variables ####################### */
-const filter = document.querySelector(".filter");
-const filterItemContainer = document.querySelector(".filter__item__container");
-let filterRemove = document.querySelectorAll(".filter__item__remove");
-const filterClear = document.querySelector(".filter__clear");
-const jobCards = document.querySelectorAll(".item__container");
-const itemFilter = document.querySelectorAll(".item__filter");
+////////////////////////////////////////////////
 
-// Dynamic DOM Variables
-let newFilterName, newFilterItem, newFilterRemove;
+/* ###################### #DOM Variables ######################### */
+// Banner
+const btnAddBook = document.querySelector(".banner__add");
+// Book Shelf
+const shelf = document.querySelectorAll(".shelf");
+const shelfActive = document.querySelector(".shelf__used");
+// Add Book Modal
+const modalAddBook = document.querySelector(".modal__add-book");
+const modalClose = document.querySelector(".modal__close");
+const btnAddToLibrary = document.querySelector(".modal__add--btn");
+// Book Card
+const bookCard = document.querySelector(".book__card");
+const bookCardClose = document.querySelector(".card__close");
+const bookCardRemove = document.querySelector(".card__remove");
+let bookCardHiddenId = document.querySelector(".hidden__id");
+let bookCardTitle = document.querySelector(".card__title");
+let bookCardAuthor = document.querySelector(".card__author");
+let bookCardPages = document.querySelector(".card__pages");
+let bookCardRead = document.querySelector(".card__slider");
 
-/* ##################### #Stored Variables ###################### */
-let newFilterItems = [];
+/* ###################### #Stored Variables ###################### */
+let myLibrary = [];
+let bookIdNum = 0;
 
-/* ###################### #Stored Functions ##################### */
-const createFilterItemsDOM = function () {
-  newFilterItem = document.createElement("button");
-  newFilterName = document.createElement("div");
-  newFilterRemove = document.createElement("img");
+/* ##################### #Stored Functions ######################### */
+function Book(title, author, pages, read) {
+  this.bookid = `book${bookIdNum}`;
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.read = read;
+  this.info = function () {
+    return `${this.title} by ${this.author}, ${this.pages} pages, ${
+      read === "1" ? "finished reading" : "not read yet"
+    }`;
+  };
+}
+
+function addBooktoLibrary(book) {
+  return myLibrary.push(book);
+}
+
+const openBookCard = function () {
+  bookCard.classList.remove("hidden");
 };
 
-const addClassesToFilterItemsDOM = function () {
-  newFilterItem.classList.add("filter__item");
-  newFilterName.classList.add("filter__item__name");
-  newFilterRemove.classList.add("filter__item__remove");
-  newFilterRemove.src = "images/icon-remove.svg";
+const addInvalidEntry = function () {
+  document.getElementById("btitle").classList.add("invalid__entry");
+  document.getElementById("bauthor").classList.add("invalid__entry");
+  document.getElementById("bpages").classList.add("invalid__entry");
 };
 
-const appendItemsToDOM = function () {
-  filterItemContainer.appendChild(newFilterItem);
-  newFilterItem.appendChild(newFilterName);
-  newFilterItem.appendChild(newFilterRemove);
+const resetModal = function () {
+  document.getElementById("btitle").classList.remove("invalid__entry");
+  document.getElementById("bauthor").classList.remove("invalid__entry");
+  document.getElementById("bpages").classList.remove("invalid__entry");
+
+  document.getElementById("btitle").value = "";
+  document.getElementById("bauthor").value = "";
+  document.getElementById("bpages").value = "";
+  document.getElementById("bread").value = "0";
 };
 
-const removeFilterFromBar = function () {
-  filterRemove.forEach((item) => {
-    item.addEventListener("mousedown", (e) => {
-      // remove filter item from array
-      newFilterItems = newFilterItems.filter(
-        (filterItem) => filterItem !== item.parentNode.textContent.toLowerCase()
-      );
-      // remove filter item from DOM
-      item.parentNode.remove();
-    });
-  });
+/* #################### #Add Book Modal ###################### */
+//Open Modal
+const openAddBookModal = function () {
+  modalAddBook.classList.remove("hidden");
 };
+btnAddBook.addEventListener("click", openAddBookModal);
 
-const updateFilterRemove = () =>
-  (filterRemove = document.querySelectorAll(".filter__item__remove"));
-
-const storeFilterToArray = () =>
-  newFilterItems.push(newFilterItem.id.toLowerCase());
-
-/* ################### #Filter Bar Visual ##################### */
-
-// Hide filter if empty
-document.addEventListener("mouseup", () => {
-  if (!filterItemContainer.hasChildNodes()) filter.classList.add("hidden");
-  else filter.classList.remove("hidden");
+//Close Modal
+modalClose.addEventListener("click", () => {
+  resetModal();
+  modalAddBook.classList.add("hidden");
 });
 
-/* ################### #Filter Bar Clear Btn ##################### */
+/* #################### #Book Card ########################### */
 
-filterClear.addEventListener("mousedown", () => {
-  // Remove all children of filter item container
-  while (filterItemContainer.firstChild) {
-    filterItemContainer.removeChild(filterItemContainer.firstChild);
+//Close Card
+bookCardClose.addEventListener("click", (e) => {
+  for (let item of myLibrary) {
+    //allow change of "read" status on close
+    if (
+      item.bookid ===
+      e.target.parentNode.querySelector(".hidden__id").textContent
+    ) {
+      item.read = e.target.parentNode.querySelector(".card__slider").value;
+    }
   }
-  // unhide hidden item cards
-  jobCards.forEach((job) => job.classList.remove("hidden"));
-  // empty filter array
-  newFilterItems = [];
+  //close card
+  bookCard.classList.add("hidden");
 });
 
-/* ################## #Filter Bar Functionality ################### */
+//Remove Book from Library
+bookCardRemove.addEventListener("click", function (e) {
+  //remove element from library array
+  myLibrary = myLibrary.filter(
+    (obj) =>
+      obj.bookid !==
+      e.target.parentNode.querySelector(".hidden__id").textContent
+  );
 
-// Create filter item when item filter clicked
-itemFilter.forEach((filterChoice) => {
-  filterChoice.addEventListener("mousedown", () => {
-    // Add check of filter for if choice already selected
-    if (newFilterItems.includes(filterChoice.textContent.toLowerCase())) return;
+  //remove element from DOM
+  document
+    .getElementById(
+      e.target.parentNode.querySelector(".hidden__id").textContent
+    )
+    .remove();
+  bookCard.classList.add("hidden");
+});
 
-    // Create new filter items in DOM
-    createFilterItemsDOM();
+/* ####################### #Add Book to Library ##################### */
 
-    // Add relevant classes and IDs to new filter items
-    newFilterName.textContent = filterChoice.textContent;
-    newFilterItem.setAttribute("id", filterChoice.textContent);
-    addClassesToFilterItemsDOM();
+btnAddToLibrary.addEventListener("click", () => {
+  //add book to library array
+  let getTitle = document.getElementById("btitle").value;
+  let getAuthor = document.getElementById("bauthor").value;
+  let getPages = document.getElementById("bpages").value;
+  let getRead = document.getElementById("bread").value;
 
-    appendItemsToDOM();
+  //disallow empty fields
+  if (getTitle === "") {
+    document.getElementById("btitle").classList.add("invalid__entry");
+    return;
+  }
+  if (getTitle !== "") {
+    document.getElementById("btitle").classList.remove("invalid__entry");
+  }
+  if (getAuthor === "") {
+    document.getElementById("bauthor").classList.add("invalid__entry");
+    return;
+  }
+  if (getAuthor !== "") {
+    document.getElementById("bauthor").classList.remove("invalid__entry");
+  }
+  if (getPages === "") {
+    document.getElementById("bpages").classList.add("invalid__entry");
+    return;
+  }
+  if (getPages !== "") {
+    document.getElementById("bpages").classList.remove("invalid__entry");
+  }
 
-    updateFilterRemove();
+  let libBookEntry = new Book(getTitle, getAuthor, getPages, getRead);
 
-    storeFilterToArray();
+  addBooktoLibrary(libBookEntry);
 
-    // Filter for individual selection
-    jobCards.forEach((job) => {
-      if (!job.classList.contains(filterChoice.textContent.toLowerCase()))
-        job.classList.add("hidden");
+  //create library book visual
+  const spine = document.createElement("div");
+  const spineTitle = document.createElement("p");
+  spineTitle.textContent = document.getElementById("btitle").value;
+  spine.classList.add("book");
+  spine.setAttribute("id", `book${bookIdNum}`);
+  bookIdNum++;
+  spineTitle.classList.add("book__title");
+  spine.appendChild(spineTitle);
+  shelfActive.appendChild(spine);
+
+  //close window
+  modalAddBook.classList.add("hidden");
+  document.getElementById("btitle").classList.remove("invalid__entry");
+  document.getElementById("bauthor").classList.remove("invalid__entry");
+  document.getElementById("bpages").classList.remove("invalid__entry");
+
+  //reset modal
+  resetModal();
+
+  //open book card on created book
+  document.querySelectorAll(".book").forEach((book) => {
+    book.addEventListener("click", function () {
+      for (let item of myLibrary) {
+        if (item.bookid === book.id) {
+          bookCardHiddenId.textContent = item.bookid;
+          bookCardTitle.textContent = item.title;
+          bookCardAuthor.textContent = item.author;
+          bookCardPages.textContent = `${item.pages} pages`;
+          bookCardRead.value = item.read;
+        }
+        openBookCard();
+      }
     });
-
-    // Remove filter item when clicked
-    removeFilterFromBar();
   });
 });
-
-/* ############### #Filter Job Cards Functionality ############### */
-
-document.addEventListener("mouseup", () => {
-  jobCards.forEach((card) => {
-    let filterTrueCheck = 0;
-    if (newFilterItems.length === 0) {
-      card.classList.remove("hidden");
-      card.classList.add("item__container--desktop");
-      return;
-    }
-    newFilterItems.forEach((item) => {
-      if ([...card.classList].includes(item)) filterTrueCheck++;
-    });
-    if (filterTrueCheck !== newFilterItems.length) {
-      card.classList.add("hidden");
-      card.classList.remove("item__container--desktop");
-    }
-    if (filterTrueCheck === newFilterItems.length) {
-      card.classList.remove("hidden");
-      card.classList.add("item__container--desktop");
-    }
-  });
-});
-
-// document.addEventListener("mouseup", () => {
-//   jobCards.forEach((card) => {
-//     let filterTrueCheck = 0;
-//     if (newFilterItems.length === 0) return card.classList.remove("hidden");
-//     newFilterItems.forEach((item) => {
-//       if ([...card.classList].includes(item)) filterTrueCheck++;
-//     });
-
-//     if (filterTrueCheck !== newFilterItems.length) card.classList.add("hidden");
-//     if (filterTrueCheck === newFilterItems.length)
-//       card.classList.remove("hidden");
-//   });
-// });
